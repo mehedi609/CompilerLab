@@ -57,7 +57,7 @@ def exponent_regex(reg_exp):
         elif not float_regex(left) or (len(left) == 1 and left == 0):
             return f"{reg_exp}  -->  Not  Valid"
         elif right[0] in ['+', '-']:
-            
+            pass
     return f"{reg_exp}  -->  Valid"
 
 
