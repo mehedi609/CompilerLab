@@ -47,9 +47,18 @@ def exponent_regex(reg_exp):
     if 'E' not in reg_exp:
         return f"{reg_exp}  -->  Not  Valid"
     reg_exp = reg_exp.split('E')
-    if len(reg_exp) == 2:
-        pass
-    return f"{reg_exp}  -->  Not  Valid"
+    left = reg_exp[0]
+    right = reg_exp[1]
+    if not len(reg_exp) == 2:
+        return f"{reg_exp}  -->  Not  Valid"
+    else:
+        if not len(right) > 0:
+            return f"{reg_exp}  -->  Not  Valid"
+        elif not float_regex(left) or (len(left) == 1 and left == 0):
+            return f"{reg_exp}  -->  Not  Valid"
+        elif right[0] in ['+', '-']:
+            
+    return f"{reg_exp}  -->  Valid"
 
 
 while True:
