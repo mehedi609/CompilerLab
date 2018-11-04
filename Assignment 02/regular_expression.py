@@ -154,6 +154,7 @@ while True:
         else:
             print('You did not enter anything', end='\n\n')
 
+    # choose to exit from the program
     elif user_choice == '6':
         print('Thank you for using this app. Good Bye!!')
         break
