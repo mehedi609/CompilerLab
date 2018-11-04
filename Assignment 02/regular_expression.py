@@ -22,9 +22,9 @@ def integer_regex(reg_exp):
 def variable_regex(reg_exp):
     if reg_exp[0].isnumeric():
         return f"{reg_exp}  -->  Not  Valid"
-    elif has_any_special_character(reg_exp):
+    if has_any_special_character(reg_exp):
         return f"{reg_exp}  -->  Not  Valid"
-    elif ' ' in reg_exp:
+    if ' ' in reg_exp:
         return f"{reg_exp}  -->  Not  Valid"
     return f"{reg_exp}  -->  Valid"
 
@@ -33,11 +33,11 @@ def variable_regex(reg_exp):
 def float_regex(reg_exp):
     if any(cha.isalpha() for cha in reg_exp):
         return False
-    elif '.' not in reg_exp:
+    if '.' not in reg_exp:
         return False
-    elif not len(reg_exp.split('.')[1]):
+    if not len(reg_exp.split('.')[1]):
         return False
-    elif ' ' in reg_exp:
+    if ' ' in reg_exp:
         return False
     return True
 
@@ -54,9 +54,11 @@ def exponent_regex(reg_exp):
     else:
         if not len(right) > 0:
             return f"{reg_exp}  -->  Not  Valid"
-        elif not float_regex(left) or (len(left) == 1 and left == 0):
+        if not float_regex(left) or (len(left) == 1 and left == 0):
             return f"{reg_exp}  -->  Not  Valid"
-        elif right[0] in ['+', '-']:
+        if right[0] in ['+', '-']:
+            pass
+        else:
             pass
     return f"{reg_exp}  -->  Valid"
 
