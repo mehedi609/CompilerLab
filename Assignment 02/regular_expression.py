@@ -142,12 +142,15 @@ while True:
 
     # choose to check regex for n Character
     elif user_choice == '5':
-        pass
+        user_input = input('Enter a valid Variables-->  ')
+        if len(user_input):
+            print(n_character_regex(user_input), end='\n\n')
+        else:
+            print('You did not enter anything', end='\n\n')
 
     elif user_choice == '6':
         print('Thank you for using this app. Good Bye!!')
         break
 
     else:
-        print('You entered wrong choice!!')
-        print('')
+        print('You entered wrong choice!!', end='\n\n')
