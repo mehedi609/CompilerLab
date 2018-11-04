@@ -54,12 +54,25 @@ def exponent_regex(reg_exp):
     else:
         if not len(right) > 0:
             return f"{reg_exp}  -->  Not  Valid"
-        if not float_regex(left) or (len(left) == 1 and left == 0):
+        if not float_regex(left):
             return f"{reg_exp}  -->  Not  Valid"
         if right[0] in ['+', '-']:
-            pass
+            if not right[1:].isnumeric():
+                return f"{reg_exp}  -->  Not  Valid"
         else:
-            pass
+            if not right.isnumeric():
+                return f"{reg_exp}  -->  Not  Valid"
+    return f"{reg_exp}  -->  Valid"
+
+
+# Regular Expression for n Character
+def n_character_regex(reg_exp):
+    if reg_exp[0] is not 'n':
+        return f"{reg_exp}  -->  Not  Valid"
+    if reg_exp[1].isdigit():
+        return f"{reg_exp}  -->  Not  Valid"
+    if has_any_special_character(reg_exp):
+        return f"{reg_exp}  -->  Not  Valid"
     return f"{reg_exp}  -->  Valid"
 
 
@@ -118,8 +131,16 @@ while True:
 
     # choose to check regex for Exponent
     elif user_choice == '4':
-        pass
+        user_input = input('Enter a valid Float Number-->  ')
+        if len(user_input):
+            if user_input[0] in ['+', '-']:
+                print(user_input[0] + exponent_regex(user_input[1:]), end='\n\n')
+            else:
+                print(exponent_regex(user_input), end='\n\n')
+        else:
+            print('You did not enter anything', end='\n\n')
 
+    # choose to check regex for n Character
     elif user_choice == '5':
         pass
 
