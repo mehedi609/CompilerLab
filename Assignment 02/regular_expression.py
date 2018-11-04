@@ -46,10 +46,10 @@ def float_regex(reg_exp):
 def exponent_regex(reg_exp):
     if 'E' not in reg_exp:
         return f"{reg_exp}  -->  Not  Valid"
-    reg_exp = reg_exp.split('E')
-    left = reg_exp[0]
-    right = reg_exp[1]
-    if not len(reg_exp) == 2:
+    reg_exp_list = reg_exp.split('E')
+    left = reg_exp_list[0]
+    right = reg_exp_list[1]
+    if not len(reg_exp_list) == 2:
         return f"{reg_exp}  -->  Not  Valid"
     else:
         if not len(right) > 0:
@@ -57,9 +57,13 @@ def exponent_regex(reg_exp):
         if not float_regex(left):
             return f"{reg_exp}  -->  Not  Valid"
         if right[0] in ['+', '-']:
+            if len(right[1:]) is 1 and int(right[1:]) is 0:
+                return f"{reg_exp}  -->  Not  Valid"
             if not right[1:].isnumeric():
                 return f"{reg_exp}  -->  Not  Valid"
         else:
+            if len(right) is 1 and int(right) is 0:
+                return f"{reg_exp}  -->  Not  Valid"
             if not right.isnumeric():
                 return f"{reg_exp}  -->  Not  Valid"
     return f"{reg_exp}  -->  Valid"
@@ -72,6 +76,8 @@ def n_character_regex(reg_exp):
     if reg_exp[1].isdigit():
         return f"{reg_exp}  -->  Not  Valid"
     if has_any_special_character(reg_exp):
+        return f"{reg_exp}  -->  Not  Valid"
+    if ' ' in reg_exp:
         return f"{reg_exp}  -->  Not  Valid"
     return f"{reg_exp}  -->  Valid"
 
@@ -131,7 +137,7 @@ while True:
 
     # choose to check regex for Exponent
     elif user_choice == '4':
-        user_input = input('Enter a valid Float Number-->  ')
+        user_input = input('Enter a valid Exponent Number-->  ')
         if len(user_input):
             if user_input[0] in ['+', '-']:
                 print(user_input[0] + exponent_regex(user_input[1:]), end='\n\n')
@@ -142,7 +148,7 @@ while True:
 
     # choose to check regex for n Character
     elif user_choice == '5':
-        user_input = input('Enter a valid Variables-->  ')
+        user_input = input('Enter a valid Variables staring with n-->  ')
         if len(user_input):
             print(n_character_regex(user_input), end='\n\n')
         else:
