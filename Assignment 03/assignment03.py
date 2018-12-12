@@ -1,17 +1,33 @@
+def sub_error(index, exp):
+    if index == len(exp) -1:
+        return True
+    character = exp[index+1]
+    if character in '*+/-':
+        return True
+
+
 def check_error(expression):
     # check for ;
-    operators = '+-*/'
     if expression[-1] != ';':
         return True
     if expression.count('(') != expression.count(')'):
         return True
-    for i, cha in enumerate(expression):
-        if cha in operators:
-            if i == len(expression) - 1:
+    formatted_exp = expression[:-1]
+    for i, cha in enumerate(formatted_exp):
+        if cha in '+-*/':
+            if sub_error(i, formatted_exp):
                 return True
-            value = expression[i+1]
-            if not value.isdigit() or value != '(':
+        if cha is '(':
+            if sub_error(i, formatted_exp):
                 return True
-            break
     return False
 
+
+with open('input.txt') as rf:
+    for line in rf:
+        if check_error(line.strip('\n')):
+            print('Error!!')
+            break
+
+        with open('output.txt', 'a') as af:
+            af.write(line)
